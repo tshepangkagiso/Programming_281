@@ -11,26 +11,25 @@ using System.Threading.Tasks;
 namespace Charity_Contribution_System.Classes
 {
     //Represents a user of the system with attributes such as Name, Email, and methods for interacting with charities.
-    //Use Encapsulation here.
-    internal class User: IDataPersistable
+    internal class User : IDataPersistable
     {
-        private string Username {  get; set; }
-        private string Password { get; set; }
-        private decimal Wallet {  get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public decimal Wallet { get; set; }
 
-        private const string FilePath = @"C:\Users\tshep\OneDrive\Desktop\Programming_281\Charity Contribution System\LocalStorage\users.json";
+
+        private const string ProjectName = "Charity Contribution System";
+        private const string LocalStorageFolder = "LocalStorage";
+        private const string FileName = "users.json";
+
+        public User() { } 
 
         public User(string username, string password, decimal wallet)
         {
-            this._Username = username;
-            this._Password = password;
-            this._Wallet = wallet;
+            Username = username;
+            Password = password;
+            Wallet = wallet;
         }
-
-        public string _Username { get { return Username; } set { if (value != null) { Username = value; } else { Username = "Did not specify name"; } } }
-        public string _Password { get { return Password; } set { if (value != null) { Password = value; } else { Username = "Did not enter password"; } } }
-
-        public decimal _Wallet { get { return Wallet; } set { if (value > 0) { Wallet = value; } else { Wallet = 0m; } } }
 
         public static List<User> ListOfUsers = new List<User>()
         {
@@ -40,51 +39,98 @@ namespace Charity_Contribution_System.Classes
             new User("chrisJones", "qwerty987", 300.25m)
         };
 
-        // Method to save changes to charities.json, that occured in ListOfCharities.
         public void SaveData()
         {
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
+                string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
 
+                Console.WriteLine($"Full path: {fullPath}"); // For debugging
+
+                string directoryPath = Path.GetDirectoryName(fullPath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+
+                string jsonString = JsonSerializer.Serialize(ListOfUsers, options);
+                File.WriteAllText(fullPath, jsonString);
+                Console.WriteLine("Successfully saved data to users.json");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        // Method to load existing list of charities.
         public void LoadData()
         {
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
+                string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
+
+                Console.WriteLine($"Full path: {fullPath}"); // For debugging
+
+                if (File.Exists(fullPath))
+                {
+                    string jsonString = File.ReadAllText(fullPath);
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    ListOfUsers = JsonSerializer.Deserialize<List<User>>(jsonString, options);
+                    Console.WriteLine("Successfully loaded data from users.json");
+                }
+                else
+                {
+                    // If file doesn't exist, initialize with default list and save
+                    SaveData();
+                    Console.WriteLine("Initialized saved data locally and then loaded data from users.json");
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
-        //Methods we call outside this call that reference internal methods.
-        public delegate void data();
+        public delegate void Data();
+
         public static void SaveUserData()
         {
             Thread thread = new Thread(() =>
             {
-                data SaveData = new User("","",0m).SaveData;
+                Data SaveData = new User().SaveData;
                 lock (ListOfUsers)
                 {
                     SaveData.Invoke();
                 }
-
             });
-  
+
             thread.Start();
             thread.Join();
-
         }
 
         public static void LoadUserData()
         {
             Thread thread = new Thread(() =>
             {
-                data LoadData = new User("", "", 0m).LoadData;
+                Data LoadData = new User().LoadData;
                 lock (ListOfUsers)
                 {
                     LoadData.Invoke();
                 }
-                
             });
-
             thread.Start();
             thread.Join();
-
         }
     }
 }

@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 namespace Charity_Contribution_System.Classes
 {
     //represents individual charity entities with specific attributes and methods.
-    internal class SpecificCharity : Charity
+    public class SpecificCharity : Charity
     {
-        private string CharityType { get; set; }
-        public SpecificCharity(string name, string description, string charityType ,decimal totalDonations) : base(name, description, totalDonations)
-        {
-            this._CharityType = charityType;
-        }
+        public string CharityType { get; set; }
 
-        public string _CharityType { get { return CharityType; } set { CharityType = value; } }
+        // Parameterless constructor for deserialization
+        public SpecificCharity() : base() { }
+
+        public SpecificCharity(string name, string description, string charityType, decimal totalDonations)
+            : base(name, description, totalDonations)
+        {
+            CharityType = charityType;
+        }
     }
 }

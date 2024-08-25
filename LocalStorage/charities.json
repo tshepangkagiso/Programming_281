@@ -1,0 +1,402 @@
+[
+  {
+    "_CharityType": "Education",
+    "Name": "UNICEF",
+    "Description": "Works to ensure every child can access quality education.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Room to Read",
+    "Description": "Focuses on literacy and gender equality in education.",
+    "TotalDonations": 8000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Save the Children",
+    "Description": "Provides educational resources to children in need.",
+    "TotalDonations": 7500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Teach For All",
+    "Description": "Network of organizations aiming to expand educational opportunity.",
+    "TotalDonations": 6500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Khan Academy",
+    "Description": "Provides free online educational content to learners worldwide.",
+    "TotalDonations": 9500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Scholarship America",
+    "Description": "Helps students achieve their dreams of higher education.",
+    "TotalDonations": 7200.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "The Education Trust",
+    "Description": "Advocates for the high academic achievement of all students.",
+    "TotalDonations": 6800.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "The Global Fund for Children",
+    "Description": "Invests in innovative, community-based organizations helping children worldwide.",
+    "TotalDonations": 8200.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "Pencils of Promise",
+    "Description": "Builds schools and increases educational opportunities in developing countries.",
+    "TotalDonations": 7000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Education",
+    "Name": "The Luminos Fund",
+    "Description": "Delivers a joyful, primary education to children denied the chance to learn.",
+    "TotalDonations": 6700.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "Doctors Without Borders",
+    "Description": "Provides medical aid in crisis situations around the world.",
+    "TotalDonations": 12000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "American Cancer Society",
+    "Description": "Dedicated to eliminating cancer as a major health problem.",
+    "TotalDonations": 11000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "The Red Cross",
+    "Description": "Offers emergency assistance, disaster relief, and education worldwide.",
+    "TotalDonations": 14000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "St. Jude Children\u0027s Research Hospital",
+    "Description": "Leading the way the world understands, treats, and defeats childhood cancer.",
+    "TotalDonations": 15000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "The Alzheimer\u0027s Association",
+    "Description": "Leads the way to end Alzheimer\u0027s and all other dementia.",
+    "TotalDonations": 9000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "Project HOPE",
+    "Description": "Provides healthcare and health education globally.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "Partners In Health",
+    "Description": "Provides healthcare to the poor and marginalized communities.",
+    "TotalDonations": 12500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "Mental Health America",
+    "Description": "Promotes mental health as a critical part of overall wellness.",
+    "TotalDonations": 8000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "The Leukemia \u0026 Lymphoma Society",
+    "Description": "The largest voluntary health organization dedicated to blood cancer.",
+    "TotalDonations": 13500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Health",
+    "Name": "Operation Smile",
+    "Description": "Provides free surgeries to repair cleft lip, cleft palate, and other facial deformities for children around the globe.",
+    "TotalDonations": 9500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "World Wildlife Fund",
+    "Description": "Works to conserve nature and reduce the most pressing threats to the diversity of life on Earth.",
+    "TotalDonations": 15000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Greenpeace",
+    "Description": "Campaigns for environmental issues and against climate change.",
+    "TotalDonations": 13000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "The Sierra Club",
+    "Description": "Promotes the responsible use of the earth\u0027s ecosystems and resources.",
+    "TotalDonations": 11000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "The Nature Conservancy",
+    "Description": "Works to protect the lands and waters on which all life depends.",
+    "TotalDonations": 14000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Rainforest Alliance",
+    "Description": "Works to conserve biodiversity and ensure sustainable livelihoods.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Friends of the Earth",
+    "Description": "A network that campaigns for environmental justice.",
+    "TotalDonations": 8000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Ocean Conservancy",
+    "Description": "Works to protect the ocean from today\u0027s greatest global challenges.",
+    "TotalDonations": 12000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Earthjustice",
+    "Description": "A nonprofit environmental law organization fighting for the protection of the environment.",
+    "TotalDonations": 9000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "Environmental Defense Fund",
+    "Description": "Addresses urgent threats to life on Earth, like climate change.",
+    "TotalDonations": 13000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Environment",
+    "Name": "350.org",
+    "Description": "Works to end the age of fossil fuels and build a world of community-led renewable energy for all.",
+    "TotalDonations": 7500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "The Humane Society of the United States",
+    "Description": "Fights for the protection of all animals.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "ASPCA",
+    "Description": "Works to rescue animals from abuse and pass humane laws.",
+    "TotalDonations": 11000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "PETA",
+    "Description": "Dedicated to establishing and defending the rights of all animals.",
+    "TotalDonations": 9000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "Best Friends Animal Society",
+    "Description": "Works to save them all by building no-kill communities.",
+    "TotalDonations": 12000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "Wildlife Conservation Society",
+    "Description": "Works to save wildlife and wild places worldwide.",
+    "TotalDonations": 10500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "World Animal Protection",
+    "Description": "Works to end the suffering of animals worldwide.",
+    "TotalDonations": 11500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "Animal Welfare Institute",
+    "Description": "Seeks to alleviate the suffering of animals caused by humans.",
+    "TotalDonations": 9500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "International Fund for Animal Welfare",
+    "Description": "Works to rescue and protect animals around the world.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "Humane Society International",
+    "Description": "Works to protect all animals around the world.",
+    "TotalDonations": 9000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Animal Welfare",
+    "Name": "Animal Legal Defense Fund",
+    "Description": "Works to protect the lives and advance the interests of animals through the legal system.",
+    "TotalDonations": 8500.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "Habitat for Humanity",
+    "Description": "Helps build and improve homes for families in need.",
+    "TotalDonations": 14000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "Heifer International",
+    "Description": "Works to end hunger and poverty by providing livestock and training.",
+    "TotalDonations": 13000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "Oxfam",
+    "Description": "Works to end the injustice of poverty.",
+    "TotalDonations": 12000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "CARE",
+    "Description": "Fights global poverty and provides disaster relief.",
+    "TotalDonations": 11000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "United Way",
+    "Description": "Fights for the health, education, and financial stability of every person in every community.",
+    "TotalDonations": 10000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "The Salvation Army",
+    "Description": "Provides a wide array of social services worldwide.",
+    "TotalDonations": 9000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "Mercy Corps",
+    "Description": "Helps people in the world\u0027s toughest places survive the crises they confront and turn them into opportunities for progress.",
+    "TotalDonations": 15000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "GlobalGiving",
+    "Description": "Connects donors with grassroots projects around the world.",
+    "TotalDonations": 8000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "World Vision",
+    "Description": "Helps the world\u0027s most vulnerable overcome poverty and experience fullness of life.",
+    "TotalDonations": 13000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  },
+  {
+    "_CharityType": "Community Development",
+    "Name": "Build Change",
+    "Description": "Works to save lives in earthquakes and windstorms by empowering people to live and learn in safe houses.",
+    "TotalDonations": 12000.00,
+    "Feedback": null,
+    "DonationHistory": null
+  }
+]

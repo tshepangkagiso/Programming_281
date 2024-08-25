@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json; // injected dependecy to use JsonSerializer
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,9 @@ namespace Charity_Contribution_System.Classes
     //Implements IDataPersistable for data persistence. 
     internal class CharityManager : IDataPersistable
     {
-        private const string FilePath = @"C:\Users\tshep\OneDrive\Desktop\Programming_281\Charity Contribution System\LocalStorage\charities.json";
+        private const string ProjectName = "Charity Contribution System";
+        private const string LocalStorageFolder = "LocalStorage";
+        private const string FileName = "charities.json";
 
         public static List<SpecificCharity> ListOfCharities = new List<SpecificCharity>()
         {
@@ -83,11 +86,67 @@ namespace Charity_Contribution_System.Classes
         // Method to save changes to charities.json, that occured in ListOfCharities.
         public void SaveData()
         {
-        }
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
+                string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
 
+                Console.WriteLine($"Full path: {fullPath}"); // For debugging
+
+                string directoryPath = Path.GetDirectoryName(fullPath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                string jsonString = JsonSerializer.Serialize(ListOfCharities, options);
+                File.WriteAllText(fullPath, jsonString);
+                Console.WriteLine("Successfully saved data to charities.json");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
         // Method to load existing list of charities.
         public void LoadData()
         {
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
+                string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
+
+                if (File.Exists(fullPath))
+                {
+                    string jsonString = File.ReadAllText(fullPath);
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                        ReferenceHandler = ReferenceHandler.Preserve
+                    };
+                    ListOfCharities = JsonSerializer.Deserialize<List<SpecificCharity>>(jsonString, options);
+                    Console.WriteLine("Successfully loaded data from charities.json");
+                }
+                else
+                {
+                    // If file doesn't exist, initialize with default list and save
+                    SaveData();
+                    Console.WriteLine("Initialized saved data locally and then loaded data from charities.json");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 

@@ -8,39 +8,35 @@ using System.Threading.Tasks;
 namespace Charity_Contribution_System.Classes
 {
     //base class implementing the ICharity interface.
-    abstract class Charity : ICharity
+    public abstract class Charity : ICharity
     {
-        //Properties
-        public string Name { get; protected set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal TotalDonations { get; set; }
+        public List<string> Feedback { get; set; } = new List<string>();
+        public List<decimal> DonationHistory { get; set; } = new List<decimal>();
 
-        public string Description { get; protected set; }
+        // Parameterless constructor for deserialization
+        protected Charity() { }
 
-        public decimal TotalDonations { get; protected set; }
-
-        //Custom Constructors
         protected Charity(string name, string description, decimal totalDonations)
         {
-            this.Name = name;
-            this.Description = description;
-            this.TotalDonations = totalDonations;
+            Name = name;
+            Description = description;
+            TotalDonations = totalDonations;
         }
 
-        //Data Structures
-        public List<string> Feedback { get; private set; } 
-        public List<decimal> DonationHistory { get; private set; }
-
-        //Methods
-        public void Donate(decimal amount)
+        public virtual void Donate(decimal amount)
         {
             throw new NotImplementedException();
         }
 
-        public void GetDetails()
+        public virtual void GetDetails()
         {
             throw new NotImplementedException();
         }
 
-        public void GiveFeedback(string feedback)
+        public virtual void GiveFeedback(string feedback)
         {
             throw new NotImplementedException();
         }

@@ -31,7 +31,7 @@ namespace Charity_Contribution_System
         {
             try
             {
-                
+
             } catch (Exception e)
             {
                 Console.WriteLine(e.Message);
