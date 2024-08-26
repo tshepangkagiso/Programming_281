@@ -47,8 +47,6 @@ namespace Charity_Contribution_System.Classes
                 string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
                 string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
 
-                Console.WriteLine($"Full path: {fullPath}"); // For debugging
-
                 string directoryPath = Path.GetDirectoryName(fullPath);
                 if (!Directory.Exists(directoryPath))
                 {
@@ -78,8 +76,6 @@ namespace Charity_Contribution_System.Classes
                 string projectPath = Path.Combine(desktopPath, "Programming_281", ProjectName);
                 string fullPath = Path.Combine(projectPath, LocalStorageFolder, FileName);
 
-                Console.WriteLine($"Full path: {fullPath}"); // For debugging
-
                 if (File.Exists(fullPath))
                 {
                     string jsonString = File.ReadAllText(fullPath);
@@ -94,6 +90,7 @@ namespace Charity_Contribution_System.Classes
                 {
                     // If file doesn't exist, initialize with default list and save
                     SaveData();
+                    User.SaveUserData();
                     Console.WriteLine("Initialized saved data locally and then loaded data from users.json");
                 }
             }catch(Exception ex)

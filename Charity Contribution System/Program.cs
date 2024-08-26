@@ -31,7 +31,17 @@ namespace Charity_Contribution_System
         {
             try
             {
-
+                LoadPersistentJsonData();
+                User user = Login_Register();
+                if (user != null)
+                {
+                    ApplicationProcess(user);
+                }
+                else
+                {
+                    Console.WriteLine("User not found or not registered.");
+                    Exit();
+                }
             } catch (Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -52,7 +62,7 @@ namespace Charity_Contribution_System
                 {
                     Console.WriteLine($"{(int)option}. {option.ToString()}");
                 }
-                Console.Write("\nEnter Menu choice between 1 - 7");
+                Console.Write("\nEnter Menu choice between 1 - 7: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice > 0)
                 {
@@ -89,7 +99,7 @@ namespace Charity_Contribution_System
                 {
                     Console.WriteLine($"{(int)option}. {option.ToString()}");
                 }
-                Console.WriteLine("Enter choice between 1 - 3 only");
+                Console.Write("Enter choice between 1 - 3 only: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice > 0)
                 {
@@ -97,17 +107,46 @@ namespace Charity_Contribution_System
                     {
                         case 1:
                             Console.WriteLine("Login confirmed.");
-                            Console.WriteLine("Enter Username");
+                            Console.Write("Enter Username: ");
                             string username = Console.ReadLine().Trim();
-                            Console.WriteLine("Enter Password");
+                            Console.Write("Enter Password: ");
                             string password = Console.ReadLine().Trim();
-                            
-                            User.LoadUserData();
-                            CharityManager.LoadCharityData();
+
+                            User user = User.ListOfUsers.Find(x => x.Username == username && x.Password == password);
+                            if(user != null)
+                            {
+                                Console.WriteLine("User found, successful login.");
+                                Console.WriteLine("====================================================================================================== \n");
+                                Console.Clear();
+                                return user;
+                                
+                            }
                             return null;
 
                         case 2:
                             Console.WriteLine("Registration confirmed.");
+                            Console.Write("Enter Username: ");
+                            string username1 = Console.ReadLine().Trim();
+                            Console.Write("Enter Password: ");
+                            string password1 = Console.ReadLine().Trim();                           
+                            Console.Write("Enter the amount of funds you want in your wallet: ");
+                            decimal wallet = Convert.ToDecimal(Console.ReadLine());
+
+                            User newUser = new User(username1, password1,wallet);
+                            User.ListOfUsers.Add(newUser);
+                            User.SaveUserData();
+                            User.LoadUserData();
+
+
+                            User userLogin = User.ListOfUsers.Find(x => x.Username == username1 && x.Password == password1);
+                            if (userLogin != null)
+                            {
+                                Console.WriteLine("User successful registration, User found, successful login.");
+                                Console.WriteLine("====================================================================================================== \n");
+                                Console.Clear();
+                                return userLogin;
+
+                            }
                             return null;
 
                         case 3:
@@ -192,6 +231,12 @@ namespace Charity_Contribution_System
                 Console.WriteLine(e.Message);
             }
 
+        }
+
+        public static void LoadPersistentJsonData()
+        {
+            User.LoadUserData();
+            CharityManager.LoadCharityData();
         }
     }
 }

@@ -1,3 +1,27 @@
-{
-
-}
+[
+  {
+    "Username": "johnDoe",
+    "Password": "password123",
+    "Wallet": 500.00
+  },
+  {
+    "Username": "janeSmith",
+    "Password": "securePass",
+    "Wallet": 750.50
+  },
+  {
+    "Username": "alexBrown",
+    "Password": "abc1234",
+    "Wallet": 1200.75
+  },
+  {
+    "Username": "chrisJones",
+    "Password": "qwerty987",
+    "Wallet": 300.25
+  },
+  {
+    "Username": "Ndinae",
+    "Password": "Charmaine",
+    "Wallet": 50
+  }
+]
