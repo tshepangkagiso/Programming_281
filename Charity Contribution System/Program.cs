@@ -1,4 +1,4 @@
-﻿using Charity_Contribution_System.Classes;
+using Charity_Contribution_System.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +27,7 @@ namespace Charity_Contribution_System
             RegisterAndLoginIn,
             Exit
         }
+
         static void Main(string[] args)
         {
             try
@@ -42,7 +43,8 @@ namespace Charity_Contribution_System
                     Console.WriteLine("User not found or not registered.");
                     Exit();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -50,7 +52,6 @@ namespace Charity_Contribution_System
             {
                 Console.ReadKey();
             }
-            
         }
 
         public static int Menu()
@@ -68,7 +69,6 @@ namespace Charity_Contribution_System
                 {
                     Console.WriteLine("====================================================================================================== \n");
                     return choice;
-
                 }
                 else
                 {
@@ -76,8 +76,8 @@ namespace Charity_Contribution_System
                     Console.WriteLine("====================================================================================================== \n");
                     return -1;
                 }
-
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return -1;
@@ -103,7 +103,7 @@ namespace Charity_Contribution_System
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice > 0)
                 {
-                    switch(choice)
+                    switch (choice)
                     {
                         case 1:
                             Console.WriteLine("Login confirmed.");
@@ -113,13 +113,12 @@ namespace Charity_Contribution_System
                             string password = Console.ReadLine().Trim();
 
                             User user = User.ListOfUsers.Find(x => x.Username == username && x.Password == password);
-                            if(user != null)
+                            if (user != null)
                             {
                                 Console.WriteLine("User found, successful login.");
                                 Console.WriteLine("====================================================================================================== \n");
                                 Console.Clear();
                                 return user;
-                                
                             }
                             return null;
 
@@ -128,15 +127,14 @@ namespace Charity_Contribution_System
                             Console.Write("Enter Username: ");
                             string username1 = Console.ReadLine().Trim();
                             Console.Write("Enter Password: ");
-                            string password1 = Console.ReadLine().Trim();                           
+                            string password1 = Console.ReadLine().Trim();
                             Console.Write("Enter the amount of funds you want in your wallet: ");
                             decimal wallet = Convert.ToDecimal(Console.ReadLine());
 
-                            User newUser = new User(username1, password1,wallet);
+                            User newUser = new User(username1, password1, wallet);
                             User.ListOfUsers.Add(newUser);
                             User.SaveUserData();
                             User.LoadUserData();
-
 
                             User userLogin = User.ListOfUsers.Find(x => x.Username == username1 && x.Password == password1);
                             if (userLogin != null)
@@ -145,7 +143,6 @@ namespace Charity_Contribution_System
                                 Console.WriteLine("====================================================================================================== \n");
                                 Console.Clear();
                                 return userLogin;
-
                             }
                             return null;
 
@@ -157,7 +154,6 @@ namespace Charity_Contribution_System
                         default:
                             Console.WriteLine("Choice unknown");
                             return null;
-
                     }
                 }
                 else
@@ -166,7 +162,8 @@ namespace Charity_Contribution_System
                     Console.WriteLine("====================================================================================================== \n");
                     return null;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return null;
@@ -191,7 +188,7 @@ namespace Charity_Contribution_System
                                 break;
 
                             case 2:
-                                Console.WriteLine("Search Charities confirmed.");
+                                SearchCharities();
                                 break;
 
                             case 3:
@@ -203,7 +200,7 @@ namespace Charity_Contribution_System
                                 break;
 
                             case 5:
-                                Console.WriteLine("Give Feedback confirmed.");
+                                GiveFeedback();
                                 break;
 
                             case 6:
@@ -216,7 +213,7 @@ namespace Charity_Contribution_System
                                 break;
 
                             default:
-                                Console.WriteLine("Error occured in menu selecting process.");
+                                Console.WriteLine("Error occurred in menu selecting process.");
                                 break;
                         }
                     }
@@ -230,13 +227,105 @@ namespace Charity_Contribution_System
             {
                 Console.WriteLine(e.Message);
             }
-
         }
 
         public static void LoadPersistentJsonData()
         {
             User.LoadUserData();
             CharityManager.LoadCharityData();
+        }
+
+        // Sub-menu for Searching Charities
+        public static void SearchCharities()
+        {
+            try
+            {
+                Console.WriteLine("Search Charities Menu:");
+                Console.WriteLine("1. Search by Name");
+                Console.WriteLine("2. Search by Category");
+                Console.WriteLine("3. Search by Location");
+                Console.WriteLine("4. Back to Main Menu");
+
+                Console.Write("\nEnter your choice: ");
+                int searchChoice = Convert.ToInt32(Console.ReadLine());
+
+                switch (searchChoice)
+                {
+                    case 1:
+                        Console.Write("Enter Charity Name: ");
+                        string name = Console.ReadLine().Trim();
+                        break;
+
+                    case 2:
+                        Console.Write("Enter Charity Category: ");
+                        string category = Console.ReadLine().Trim();
+                        break;
+
+                    case 3:
+                        Console.Write("Enter Charity Location: ");
+                        string location = Console.ReadLine().Trim();
+                        break;
+
+                    case 4:
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Returning to Main Menu.");
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        // Sub-menu for Giving Feedback
+        public static void GiveFeedback()
+        {
+            try
+            {
+                Console.WriteLine("Give Feedback Menu:");
+                Console.WriteLine("1. Feedback on Charities");
+                Console.WriteLine("2. Feedback on Donation Process");
+                Console.WriteLine("3. General Feedback");
+                Console.WriteLine("4. Back to Main Menu");
+
+                Console.Write("\nEnter your choice: ");
+                int feedbackChoice = Convert.ToInt32(Console.ReadLine());
+
+                switch (feedbackChoice)
+                {
+                    case 1:
+                        Console.Write("Enter Charity Name for Feedback: ");
+                        string charityName = Console.ReadLine().Trim();
+                        // Implement feedback on charities logic
+                        break;
+
+                    case 2:
+                        Console.Write("Enter Donation Process Feedback: ");
+                        string donationFeedback = Console.ReadLine().Trim();
+                        // Implement feedback on donation process logic
+                        break;
+
+                    case 3:
+                        Console.Write("Enter General Feedback: ");
+                        string generalFeedback = Console.ReadLine().Trim();
+                        // Implement general feedback logic
+                        break;
+
+                    case 4:
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Returning to Main Menu.");
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
