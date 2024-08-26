@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 namespace Charity_Contribution_System.Classes
 {
     //Manages the list of charities, including search functionality, adding new charities, and handling donations.
-    //Implements IDataPersistable for data persistence. 
     internal class CharityManager : IDataPersistable
     {
         private const string ProjectName = "Charity Contribution System";

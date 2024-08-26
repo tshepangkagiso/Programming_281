@@ -16,7 +16,6 @@ namespace Charity_Contribution_System.Classes
         public List<string> Feedback { get; set; } = new List<string>();
         public List<decimal> DonationHistory { get; set; } = new List<decimal>();
 
-        // Parameterless constructor for deserialization
         protected Charity() { }
 
         protected Charity(string name, string description, decimal totalDonations)

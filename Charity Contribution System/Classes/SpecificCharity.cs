@@ -10,14 +10,47 @@ namespace Charity_Contribution_System.Classes
     public class SpecificCharity : Charity
     {
         public string CharityType { get; set; }
-
-        // Parameterless constructor for deserialization
         public SpecificCharity() : base() { }
 
-        public SpecificCharity(string name, string description, string charityType, decimal totalDonations)
-            : base(name, description, totalDonations)
+        public SpecificCharity(string name, string description, string charityType, decimal totalDonations) : base(name, description, totalDonations)
         {
             CharityType = charityType;
+        }
+
+
+        public override void Donate(decimal amount)
+        {
+            TotalDonations += amount;
+            DonationHistory.Add(amount);
+            Console.WriteLine($"Thank you for donating {amount:C} to {Name}!");
+        }
+
+        public override void GetDetails()
+        {
+            Console.WriteLine("Charity Details:");
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Type: {CharityType}");
+            Console.WriteLine($"Total Donations: {TotalDonations:C}");
+
+            if (DonationHistory.Count > 0)
+            {
+                Console.WriteLine("Donation History:");
+                foreach (var donation in DonationHistory)
+                {
+                    Console.WriteLine($"- {donation:C}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No donations have been made yet.");
+            }
+        }
+
+        public override void GiveFeedback(string feedback)
+        {
+            Feedback.Add(feedback);
+            Console.WriteLine($"Thank you for your feedback on {Name}: \"{feedback}\"");
         }
     }
 }
