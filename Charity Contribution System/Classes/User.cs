@@ -7,24 +7,29 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+ 
 
 namespace Charity_Contribution_System.Classes
-{
+{  
     //Represents a user of the system with attributes such as Name, Email, and methods for interacting with charities.
+
     internal class User : IDataPersistable
     {
         public string Username { get; set; }
         public string Password { get; set; }
         public decimal Wallet { get; set; }
-
+        public List<Donation> DonationHistory { get; set; }
 
         private const string ProjectName = "Charity Contribution System";
         private const string LocalStorageFolder = "LocalStorage";
         private const string FileName = "users.json";
 
-        public User() { } 
+        public User() 
+        { 
+            DonationHistory = new List<Donation>();
+        } 
 
-        public User(string username, string password, decimal wallet)
+        public User(string username, string password, decimal wallet) : this()
         {
             Username = username;
             Password = password;
@@ -38,6 +43,45 @@ namespace Charity_Contribution_System.Classes
             new User("alexBrown", "abc1234", 1200.75m),
             new User("chrisJones", "qwerty987", 300.25m)
         };
+
+        public bool Withdraw(decimal amount)
+        {
+            if (Wallet >= amount)
+            {
+                Wallet -= amount;
+                return true;
+            }
+            return false;
+        }
+
+        public void Deposit(decimal amount)
+        {
+            Wallet += amount;
+        }
+
+        public void Donate(Charity charity, decimal amount)
+        {
+            if (Withdraw(amount))
+            {
+                var donation = new Donation(charity.Name, amount, DateTime.Now);
+                DonationHistory.Add(donation);
+                SaveData();
+                Console.WriteLine($"Successfully donated {amount:C} to {charity.Name}.");
+            }
+            else
+            {
+                Console.WriteLine("Insufficient funds in the wallet. Donation failed.");
+            }
+        }
+
+        public void ViewDonationHistory()
+        {
+            Console.WriteLine("Donation History:");
+            foreach (var donation in DonationHistory)
+            {
+                Console.WriteLine($"Date: {donation.Date}, Charity: {donation.CharityName}, Amount: {donation.Amount:C}");
+            }
+        }
 
         public void SaveData()
         {
