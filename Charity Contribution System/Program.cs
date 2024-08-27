@@ -172,7 +172,7 @@ namespace Charity_Contribution_System
 
         public static void ApplicationProcess(User user)
         {
-            try
+                       try
             {
                 User mainUser = user;
                 while (true)
@@ -185,6 +185,7 @@ namespace Charity_Contribution_System
                         {
                             case 1:
                                 Console.WriteLine("View All Charities confirmed.");
+                                ViewAllCharities();
                                 break;
 
                             case 2:
@@ -193,10 +194,12 @@ namespace Charity_Contribution_System
 
                             case 3:
                                 Console.WriteLine("Donate confirmed.");
+                                // Implement donation logic here
                                 break;
 
                             case 4:
                                 Console.WriteLine("Learn more confirmed.");
+                                // Implement learn more logic here
                                 break;
 
                             case 5:
@@ -205,6 +208,7 @@ namespace Charity_Contribution_System
 
                             case 6:
                                 Console.WriteLine("View Donation History confirmed.");
+                                ViewDonationHistory(mainUser);
                                 break;
 
                             case 7:
@@ -235,7 +239,16 @@ namespace Charity_Contribution_System
             CharityManager.LoadCharityData();
         }
 
-        // Sub-menu for Searching Charities
+        public static void ViewAllCharities()
+        {
+            var allCharities = CharityManager.ListOfCharities;
+            foreach (var charity in allCharities)
+            {
+                Console.WriteLine($"Name: {charity.Name}, Category: {charity.Category}, Location: {charity.Location}");
+            }
+        }
+
+        // Sub-menu for Searching Charities using LINQ
         public static void SearchCharities()
         {
             try
@@ -249,21 +262,26 @@ namespace Charity_Contribution_System
                 Console.Write("\nEnter your choice: ");
                 int searchChoice = Convert.ToInt32(Console.ReadLine());
 
+                IEnumerable<Charity> results = Enumerable.Empty<Charity>();
+
                 switch (searchChoice)
                 {
                     case 1:
                         Console.Write("Enter Charity Name: ");
                         string name = Console.ReadLine().Trim();
+                        results = CharityManager.ListOfCharities.Where(c => c.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
                         break;
 
                     case 2:
                         Console.Write("Enter Charity Category: ");
                         string category = Console.ReadLine().Trim();
+                        results = CharityManager.ListOfCharities.Where(c => c.Category.Contains(category, StringComparison.OrdinalIgnoreCase));
                         break;
 
                     case 3:
                         Console.Write("Enter Charity Location: ");
                         string location = Console.ReadLine().Trim();
+                        results = CharityManager.ListOfCharities.Where(c => c.Location.Contains(location, StringComparison.OrdinalIgnoreCase));
                         break;
 
                     case 4:
@@ -272,6 +290,12 @@ namespace Charity_Contribution_System
                     default:
                         Console.WriteLine("Invalid choice. Returning to Main Menu.");
                         break;
+                }
+
+                Console.WriteLine("Search Results:");
+                foreach (var charity in results)
+                {
+                    Console.WriteLine($"Name: {charity.Name}, Category: {charity.Category}, Location: {charity.Location}");
                 }
             }
             catch (Exception e)
@@ -289,7 +313,8 @@ namespace Charity_Contribution_System
                 Console.WriteLine("1. Feedback on Charities");
                 Console.WriteLine("2. Feedback on Donation Process");
                 Console.WriteLine("3. General Feedback");
-                Console.WriteLine("4. Back to Main Menu");
+                Console.WriteLine("4. View All Feedbacks");
+                Console.WriteLine("5. Back to Main Menu");
 
                 Console.Write("\nEnter your choice: ");
                 int feedbackChoice = Convert.ToInt32(Console.ReadLine());
@@ -299,22 +324,31 @@ namespace Charity_Contribution_System
                     case 1:
                         Console.Write("Enter Charity Name for Feedback: ");
                         string charityName = Console.ReadLine().Trim();
-                        // Implement feedback on charities logic
+                        Console.Write("Enter your feedback: ");
+                        string feedback = Console.ReadLine().Trim();
+                        FeedbackManager.AddFeedback(charityName, feedback, "Charity");
+                        Console.WriteLine("Feedback submitted successfully.");
                         break;
 
                     case 2:
                         Console.Write("Enter Donation Process Feedback: ");
                         string donationFeedback = Console.ReadLine().Trim();
-                        // Implement feedback on donation process logic
+                        FeedbackManager.AddFeedback("Donation Process", donationFeedback, "Process");
+                        Console.WriteLine("Feedback submitted successfully.");
                         break;
 
                     case 3:
                         Console.Write("Enter General Feedback: ");
                         string generalFeedback = Console.ReadLine().Trim();
-                        // Implement general feedback logic
+                        FeedbackManager.AddFeedback("General", generalFeedback, "General");
+                        Console.WriteLine("Feedback submitted successfully.");
                         break;
 
                     case 4:
+                        ViewAllFeedbacks();
+                        break;
+
+                    case 5:
                         return;
 
                     default:
@@ -327,5 +361,35 @@ namespace Charity_Contribution_System
                 Console.WriteLine(e.Message);
             }
         }
+
+        // View Donation History with LINQ
+        public static void ViewDonationHistory(User user)
+        {
+            var donationHistory = user.DonationHistory
+                .OrderByDescending(d => d.Date) 
+                .ToList();
+
+            Console.WriteLine("Donation History:");
+            foreach (var donation in donationHistory)
+            {
+                Console.WriteLine($"Date: {donation.Date}, Charity: {donation.CharityName}, Amount: {donation.Amount:C}");
+            }
+        }
+
+        // View All Feedbacks with LINQ
+        public static void ViewAllFeedbacks()
+        {
+            var feedbacks = FeedbackManager.FeedbackList
+                .OrderBy(f => f.Type) 
+                .ThenByDescending(f => f.DateSubmitted) 
+                .ToList();
+
+            Console.WriteLine("All Feedbacks:");
+            foreach (var feedback in feedbacks)
+            {
+                Console.WriteLine($"Type: {feedback.Type}, Date: {feedback.DateSubmitted}, Comment: {feedback.Comment}");
+            }
+        }
     }
 }
+
