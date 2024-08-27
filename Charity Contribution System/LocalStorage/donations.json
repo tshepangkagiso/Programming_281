@@ -1,1 +1,15 @@
+[
+    {
+        "Username": "johnDoe",
+        "CharityName": "Save the Children",
+        "AmountDonated": 100.00,
+        "DateOfDonation": "2024-08-26T14:32:00"
+    },
+    {
+        "Username": "janeSmith",
+        "CharityName": "World Wildlife Fund",
+        "AmountDonated": 50.00,
+        "DateOfDonation": "2024-08-26T15:45:00"
+    }
+]
 
