@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Classes\Charity.cs" />
     <Compile Include="Classes\CharityManager.cs" />
+    <Compile Include="Classes\events and threads.cs" />
     <Compile Include="Classes\SpecificCharity.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Interfaces\ICharity.cs" />
