@@ -14,10 +14,13 @@ namespace Charity_Contribution_System
         {
             ViewAllCharities = 1,
             SearchCharities,
-            Donate,
+            DonateToCharity,
             LearnMore,
             GiveFeedback,
             ViewDonationHistory,
+            ViewWalletBalance,
+            DepositFunds,
+            WithdrawFunds,
             Exit
         }
 
@@ -61,9 +64,9 @@ namespace Charity_Contribution_System
                 Console.WriteLine("====================================================================================================== \n");
                 foreach (MenuOptions option in Enum.GetValues(typeof(MenuOptions)))
                 {
-                    Console.WriteLine($"{(int)option}. {option.ToString()}");
+                    Console.WriteLine($"{(int)option}. {option.ToString().Replace("ToCharity", "")}");
                 }
-                Console.Write("\nEnter Menu choice between 1 - 7: ");
+                Console.Write("\nEnter Menu choice between 1 - 10: ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 if (choice > 0)
                 {
@@ -139,7 +142,7 @@ namespace Charity_Contribution_System
                             User userLogin = User.ListOfUsers.Find(x => x.Username == username1 && x.Password == password1);
                             if (userLogin != null)
                             {
-                                Console.WriteLine("User successful registration, User found, successful login.");
+                                Console.WriteLine("User successfully registered and logged in.");
                                 Console.WriteLine("====================================================================================================== \n");
                                 Console.Clear();
                                 return userLogin;
@@ -152,7 +155,7 @@ namespace Charity_Contribution_System
                             return null;
 
                         default:
-                            Console.WriteLine("Choice unknown");
+                            Console.WriteLine("Unknown choice.");
                             return null;
                     }
                 }
@@ -172,7 +175,7 @@ namespace Charity_Contribution_System
 
         public static void ApplicationProcess(User user)
         {
-                       try
+            try
             {
                 User mainUser = user;
                 while (true)
@@ -180,44 +183,72 @@ namespace Charity_Contribution_System
                     try
                     {
                         int choice = Menu();
-
                         switch (choice)
                         {
                             case 1:
                                 Console.WriteLine("View All Charities confirmed.");
-                                ViewAllCharities();
+                                // Implement logic to view all charities
                                 break;
-
                             case 2:
-                                SearchCharities();
+                                Console.WriteLine("Search Charities confirmed.");
+                                // Implement logic to search charities
                                 break;
-
                             case 3:
-                                Console.WriteLine("Donate confirmed.");
-                                // Implement donation logic here
-                                break;
+                                Console.WriteLine("Donate to Charity confirmed.");
+                                // Logic to choose a charity from a list and donate
+                                Console.Write("Enter the name of the charity: ");
+                                string charityName = Console.ReadLine();
+                                Console.Write("Enter the amount to donate: ");
+                                decimal donationAmount = Convert.ToDecimal(Console.ReadLine());
 
+                                Charity charity = new Charity(charityName);  // Ensure Charity class is defined
+                                mainUser.Donate(charity, donationAmount);
+                                User.SaveUserData();
+                                break;
                             case 4:
-                                Console.WriteLine("Learn more confirmed.");
-                                // Implement learn more logic here
+                                Console.WriteLine("Learn More confirmed.");
+                                // Implement logic to learn more about charities
                                 break;
-
                             case 5:
-                                GiveFeedback();
+                                Console.WriteLine("Give Feedback confirmed.");
+                                // Implement logic to give feedback
                                 break;
-
                             case 6:
                                 Console.WriteLine("View Donation History confirmed.");
-                                ViewDonationHistory(mainUser);
+                                mainUser.ViewDonationHistory();
                                 break;
-
                             case 7:
+                                Console.WriteLine("View Wallet Balance confirmed.");
+                                Console.WriteLine($"Your wallet balance is: {mainUser.Wallet:C}");
+                                break;
+                            case 8:
+                                Console.WriteLine("Deposit Funds confirmed.");
+                                Console.Write("Enter the amount to deposit: ");
+                                decimal depositAmount = Convert.ToDecimal(Console.ReadLine());
+                                mainUser.Deposit(depositAmount);
+                                User.SaveUserData();
+                                Console.WriteLine($"Successfully deposited {depositAmount:C}.");
+                                break;
+                            case 9:
+                                Console.WriteLine("Withdraw Funds confirmed.");
+                                Console.Write("Enter the amount to withdraw: ");
+                                decimal withdrawAmount = Convert.ToDecimal(Console.ReadLine());
+                                if (mainUser.Withdraw(withdrawAmount))
+                                {
+                                    User.SaveUserData();
+                                    Console.WriteLine($"Successfully withdrew {withdrawAmount:C}.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Insufficient balance.");
+                                }
+                                break;
+                            case 10:
                                 Console.WriteLine("Exit confirmed.");
                                 Exit();
                                 break;
-
                             default:
-                                Console.WriteLine("Error occurred in menu selecting process.");
+                                Console.WriteLine("Error occurred in menu selection process.");
                                 break;
                         }
                     }
@@ -238,158 +269,5 @@ namespace Charity_Contribution_System
             User.LoadUserData();
             CharityManager.LoadCharityData();
         }
-
-        public static void ViewAllCharities()
-        {
-            var allCharities = CharityManager.ListOfCharities;
-            foreach (var charity in allCharities)
-            {
-                Console.WriteLine($"Name: {charity.Name}, Category: {charity.Category}, Location: {charity.Location}");
-            }
-        }
-
-        // Sub-menu for Searching Charities using LINQ
-        public static void SearchCharities()
-        {
-            try
-            {
-                Console.WriteLine("Search Charities Menu:");
-                Console.WriteLine("1. Search by Name");
-                Console.WriteLine("2. Search by Category");
-                Console.WriteLine("3. Search by Location");
-                Console.WriteLine("4. Back to Main Menu");
-
-                Console.Write("\nEnter your choice: ");
-                int searchChoice = Convert.ToInt32(Console.ReadLine());
-
-                IEnumerable<Charity> results = Enumerable.Empty<Charity>();
-
-                switch (searchChoice)
-                {
-                    case 1:
-                        Console.Write("Enter Charity Name: ");
-                        string name = Console.ReadLine().Trim();
-                        results = CharityManager.ListOfCharities.Where(c => c.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
-                        break;
-
-                    case 2:
-                        Console.Write("Enter Charity Category: ");
-                        string category = Console.ReadLine().Trim();
-                        results = CharityManager.ListOfCharities.Where(c => c.Category.Contains(category, StringComparison.OrdinalIgnoreCase));
-                        break;
-
-                    case 3:
-                        Console.Write("Enter Charity Location: ");
-                        string location = Console.ReadLine().Trim();
-                        results = CharityManager.ListOfCharities.Where(c => c.Location.Contains(location, StringComparison.OrdinalIgnoreCase));
-                        break;
-
-                    case 4:
-                        return;
-
-                    default:
-                        Console.WriteLine("Invalid choice. Returning to Main Menu.");
-                        break;
-                }
-
-                Console.WriteLine("Search Results:");
-                foreach (var charity in results)
-                {
-                    Console.WriteLine($"Name: {charity.Name}, Category: {charity.Category}, Location: {charity.Location}");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        // Sub-menu for Giving Feedback
-        public static void GiveFeedback()
-        {
-            try
-            {
-                Console.WriteLine("Give Feedback Menu:");
-                Console.WriteLine("1. Feedback on Charities");
-                Console.WriteLine("2. Feedback on Donation Process");
-                Console.WriteLine("3. General Feedback");
-                Console.WriteLine("4. View All Feedbacks");
-                Console.WriteLine("5. Back to Main Menu");
-
-                Console.Write("\nEnter your choice: ");
-                int feedbackChoice = Convert.ToInt32(Console.ReadLine());
-
-                switch (feedbackChoice)
-                {
-                    case 1:
-                        Console.Write("Enter Charity Name for Feedback: ");
-                        string charityName = Console.ReadLine().Trim();
-                        Console.Write("Enter your feedback: ");
-                        string feedback = Console.ReadLine().Trim();
-                        FeedbackManager.AddFeedback(charityName, feedback, "Charity");
-                        Console.WriteLine("Feedback submitted successfully.");
-                        break;
-
-                    case 2:
-                        Console.Write("Enter Donation Process Feedback: ");
-                        string donationFeedback = Console.ReadLine().Trim();
-                        FeedbackManager.AddFeedback("Donation Process", donationFeedback, "Process");
-                        Console.WriteLine("Feedback submitted successfully.");
-                        break;
-
-                    case 3:
-                        Console.Write("Enter General Feedback: ");
-                        string generalFeedback = Console.ReadLine().Trim();
-                        FeedbackManager.AddFeedback("General", generalFeedback, "General");
-                        Console.WriteLine("Feedback submitted successfully.");
-                        break;
-
-                    case 4:
-                        ViewAllFeedbacks();
-                        break;
-
-                    case 5:
-                        return;
-
-                    default:
-                        Console.WriteLine("Invalid choice. Returning to Main Menu.");
-                        break;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        // View Donation History with LINQ
-        public static void ViewDonationHistory(User user)
-        {
-            var donationHistory = user.DonationHistory
-                .OrderByDescending(d => d.Date) 
-                .ToList();
-
-            Console.WriteLine("Donation History:");
-            foreach (var donation in donationHistory)
-            {
-                Console.WriteLine($"Date: {donation.Date}, Charity: {donation.CharityName}, Amount: {donation.Amount:C}");
-            }
-        }
-
-        // View All Feedbacks with LINQ
-        public static void ViewAllFeedbacks()
-        {
-            var feedbacks = FeedbackManager.FeedbackList
-                .OrderBy(f => f.Type) 
-                .ThenByDescending(f => f.DateSubmitted) 
-                .ToList();
-
-            Console.WriteLine("All Feedbacks:");
-            foreach (var feedback in feedbacks)
-            {
-                Console.WriteLine($"Type: {feedback.Type}, Date: {feedback.DateSubmitted}, Comment: {feedback.Comment}");
-            }
-        }
     }
 }
-
